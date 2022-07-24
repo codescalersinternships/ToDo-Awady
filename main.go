@@ -15,7 +15,7 @@ import (
 	"gorm.io/gorm"
 )
 
-const DBFILE = "todo.db"
+const DBFILE = "./data/todo.db"
 
 var db, err = gorm.Open(sqlite.Open(DBFILE), &gorm.Config{})
 
