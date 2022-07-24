@@ -3,10 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 
 	"net/http"
 
+	_ "restapi/docs"
+
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -46,6 +50,7 @@ func main() {
 				panic("error parsing data")
 			}
 			w.Write(data)
+			w.Write([]byte("\n"))
 
 		}
 	}).Methods("GET")
@@ -60,6 +65,7 @@ func main() {
 			panic("error parsing data")
 		}
 		w.Write(data)
+		w.Write([]byte("\n"))
 	}).Methods("POST")
 
 	r.HandleFunc("/todo/{id}", func(w http.ResponseWriter, r *http.Request) {
@@ -72,6 +78,7 @@ func main() {
 			panic("error parsing data")
 		}
 		w.Write(data)
+		w.Write([]byte("\n"))
 	}).Methods("GET")
 
 	r.HandleFunc("/todo/{id}", func(w http.ResponseWriter, r *http.Request) {
@@ -86,6 +93,7 @@ func main() {
 			panic("error parsing data")
 		}
 		w.Write(data)
+		w.Write([]byte("\n"))
 	}).Methods("PUT")
 
 	r.HandleFunc("/todo/{id}", func(w http.ResponseWriter, r *http.Request) {
@@ -98,6 +106,15 @@ func main() {
 		fmt.Fprintf(w, "%q Deleted", id)
 
 	}).Methods("DELETE")
-	http.ListenAndServe(":5000", r)
+
+	// r.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+	// 	httpSwagger.URL("doc.json"),
+	// 	httpSwagger.DeepLinking(true),
+	// 	httpSwagger.DocExpansion("none"),
+	// 	httpSwagger.DomID("swagger-ui"),
+	// )).Methods(http.MethodGet)
+	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
+
+	log.Fatal(http.ListenAndServe(":5000", r))
 
 }
