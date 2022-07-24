@@ -20,7 +20,7 @@ const DBFILE = "todo.db"
 var db, err = gorm.Open(sqlite.Open(DBFILE), &gorm.Config{})
 
 type ToDoData struct {
-	ToDoText string
+	Text string
 }
 
 type ToDo struct {
@@ -58,7 +58,7 @@ func AddToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	db.Create(&ToDo{Text: todoData.ToDoText})
+	db.Create(&ToDo{Text: todoData.Text})
 	var res ToDo
 	db.Last(&res)
 	data, err := json.Marshal(res)
@@ -91,9 +91,9 @@ func UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	db.Create(&ToDo{Text: todoData.ToDoText})
+	db.Create(&ToDo{Text: todoData.Text})
 	var res ToDo
-	db.Model(&ToDo{}).Where("ID = ?", id).Update("Text", todoData.ToDoText)
+	db.Model(&ToDo{}).Where("ID = ?", id).Update("Text", todoData.Text)
 	db.First(&res, id)
 	data, err := json.Marshal(res)
 	if err != nil {
