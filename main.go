@@ -33,7 +33,7 @@ func (ToDo) TableName() string {
 }
 
 func GetAllToDosHandler(w http.ResponseWriter, r *http.Request) {
-	rows, err := db.Model(&ToDo{}).Where("ID > ?", "0").Rows()
+	rows, err := db.Model(&ToDo{}).Rows()
 
 	if err != nil {
 		panic("error parsing data")
