@@ -19,10 +19,19 @@ const docTemplate = `{
           "summary": "add new ToDo entry",
           "parameters": [
             {
-              "in": "header",
-              "name": "todo_text",
-              "required": true,
-              "type": "string"
+              "in": "body",
+              "name": "todoText",
+              "schema": {
+                "type": "object",
+                "required": [
+                  "todoText"
+                ],
+                "properties": {
+                  "todoText": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           ],
           "description": "",
@@ -45,7 +54,7 @@ const docTemplate = `{
           "parameters": []
         }
       },
-      "/todo/{id}": {
+      "/todo/{ID}": {
         "get": {
           "tags": [
             "ToDo"
@@ -54,7 +63,7 @@ const docTemplate = `{
           "parameters": [
             {
               "in": "path",
-              "name": "id",
+              "name": "ID",
               "description": "ID of the ToDo entry",
               "required": true,
               "type": "integer"
@@ -78,7 +87,7 @@ const docTemplate = `{
           "parameters": [
             {
               "in": "path",
-              "name": "id",
+              "name": "ID",
               "description": "ID of the ToDo entry",
               "required": true,
               "type": "integer"
@@ -102,17 +111,25 @@ const docTemplate = `{
           "parameters": [
             {
               "in": "path",
-              "name": "id",
+              "name": "ID",
               "description": "ID of the ToDo entry",
               "required": true,
               "type": "integer"
             },
             {
-              "in": "header",
-              "name": "todo_text",
-              "description": "ToDo text to be updated",
-              "required": true,
-              "type": "string"
+              "in": "body",
+              "name": "todoText",
+              "schema": {
+                "type": "object",
+                "required": [
+                  "todoText"
+                ],
+                "properties": {
+                  "todoText": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           ],
           "responses": {
