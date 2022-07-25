@@ -34,23 +34,16 @@ type Server struct {
 }
 
 func (s *Server) GetAllToDosHandler(w http.ResponseWriter, r *http.Request) {
-	rows, err := s.DB.Model(&ToDo{}).Rows()
+	var rows []ToDo
+	res := s.DB.Find(&rows)
 
-	if err != nil {
-		errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
+	if res.Error != nil {
+		errJSON, _ := json.Marshal(ErrorResponse{Error: res.Error.Error()})
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	defer rows.Close()
-	for rows.Next() {
-		var res ToDo
-		err := s.DB.ScanRows(rows, &res)
-		if err != nil {
-			errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
-			http.Error(w, string(errJSON), http.StatusInternalServerError)
-			return
-		}
-		data, err := json.Marshal(res)
+	for _, row := range rows {
+		data, err := json.Marshal(row)
 		if err != nil {
 			errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
 			http.Error(w, string(errJSON), http.StatusInternalServerError)
