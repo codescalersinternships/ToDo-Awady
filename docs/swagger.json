@@ -1,0 +1,141 @@
+{
+  "info": {
+    "version": "1.0.0",
+    "title": "ToDo List API",
+    "description": "This is a simple docs for ToDo List API"
+  },
+  "paths": {
+    "/todo": {
+      "post": {
+        "tags": [
+          "ToDo"
+        ],
+        "summary": "add new ToDo entry",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "text",
+            "schema": {
+              "type": "object",
+              "required": [
+                "text"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "description": "",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ToDo"
+        ],
+        "summary": "Get all ToDo entries",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/todo/{ID}": {
+      "get": {
+        "tags": [
+          "ToDo"
+        ],
+        "summary": "Get the ToDo entry",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ID",
+            "description": "ID of the ToDo entry",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "ID Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ToDo"
+        ],
+        "summary": "delete ToDo entry",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ID",
+            "description": "ID of the ToDo entry",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "ID Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ToDo"
+        ],
+        "summary": "update ToDo entry",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ID",
+            "description": "ID of the ToDo entry",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "text",
+            "schema": {
+              "type": "object",
+              "required": [
+                "text"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "ID Not Found"
+          }
+        }
+      }
+    }
+  },
+  "swagger": "2.0"
+}
