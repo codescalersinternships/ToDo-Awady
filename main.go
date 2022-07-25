@@ -89,7 +89,7 @@ func (s *Server) GetToDoHandler(w http.ResponseWriter, r *http.Request) {
 	result := s.DB.First(&res, id)
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
-		http.Error(w, "{\"error\":\""+string(errJson)+"\"}", http.StatusInternalServerError)
+		http.Error(w, string(errJson), http.StatusInternalServerError)
 		return
 	}
 
@@ -117,13 +117,13 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 	result := s.DB.Model(&ToDo{}).Where("ID = ?", id).Update("Text", todoData.Text)
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
-		http.Error(w, "{\"error\":\""+string(errJson)+"\"}", http.StatusInternalServerError)
+		http.Error(w, string(errJson), http.StatusInternalServerError)
 		return
 	}
 	e := s.DB.First(&res, id)
 	if e.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: e.Error.Error()})
-		http.Error(w, "{\"error\":\""+string(errJson)+"\"}", http.StatusInternalServerError)
+		http.Error(w, string(errJson), http.StatusInternalServerError)
 		return
 	}
 	data, err := json.Marshal(res)
@@ -142,7 +142,7 @@ func (s *Server) DeleteToDoHandler(w http.ResponseWriter, r *http.Request) {
 	result := s.DB.Delete(&ToDo{}, id)
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
-		http.Error(w, "{\"error\":\""+string(errJson)+"\"}", http.StatusInternalServerError)
+		http.Error(w, string(errJson), http.StatusInternalServerError)
 		return
 	}
 	s.GetAllToDosHandler(w, r)
