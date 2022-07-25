@@ -1,0 +1,434 @@
+{
+	"info": {
+		"_postman_id": "1a34381e-890a-4abd-8822-f58597044760",
+		"name": "ToDo List API",
+		"description": "This is a simple docs for ToDo List API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22314902"
+	},
+	"item": [
+		{
+			"name": "todo",
+			"item": [
+				{
+					"name": "{ID}",
+					"item": [
+						{
+							"name": "Get the ToDo entry",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/todo/:ID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4969133",
+											"description": "(Required) ID of the ToDo entry"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "4969133",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "ID Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "4969133",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "delete ToDo entry",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/todo/:ID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4969133",
+											"description": "(Required) ID of the ToDo entry"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "4969133",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "ID Not Found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "4969133",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "update ToDo entry",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"text\": \"et pariatur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/todo/:ID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo",
+										":ID"
+									],
+									"variable": [
+										{
+											"key": "ID",
+											"value": "4969133",
+											"description": "(Required) ID of the ToDo entry"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "4969133",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "ID Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "4969133",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "add new ToDo entry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"et pariatur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/todo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/todo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get all ToDo entries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/todo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/todo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

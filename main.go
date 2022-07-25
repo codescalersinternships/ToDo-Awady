@@ -119,6 +119,11 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
 		http.Error(w, string(errJson), http.StatusInternalServerError)
 		return
+	} else if result.RowsAffected < 1 {
+		errJson, _ := json.Marshal(ErrorResponse{Error: "record not found"})
+		http.Error(w, string(errJson), http.StatusNotFound)
+		return
+
 	}
 	e := s.DB.First(&res, id)
 	if e.Error != nil {
@@ -143,6 +148,10 @@ func (s *Server) DeleteToDoHandler(w http.ResponseWriter, r *http.Request) {
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
 		http.Error(w, string(errJson), http.StatusInternalServerError)
+		return
+	} else if result.RowsAffected < 1 {
+		errJson, _ := json.Marshal(ErrorResponse{Error: "record not found"})
+		http.Error(w, string(errJson), http.StatusNotFound)
 		return
 	}
 	s.GetAllToDosHandler(w, r)
