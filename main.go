@@ -25,10 +25,6 @@ type ToDo struct {
 	Text string
 }
 
-func (ToDo) TableName() string {
-	return "ToDo"
-}
-
 type ErrorResponse struct {
 	Error string
 }
@@ -117,7 +113,6 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	s.DB.Create(&ToDo{Text: todoData.Text})
 	var res ToDo
 	result := s.DB.Model(&ToDo{}).Where("ID = ?", id).Update("Text", todoData.Text)
 	if result.Error != nil {
