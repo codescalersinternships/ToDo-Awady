@@ -42,17 +42,14 @@ func (s *Server) GetAllToDosHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	for _, row := range rows {
-		data, err := json.Marshal(row)
-		if err != nil {
-			errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
-			http.Error(w, string(errJSON), http.StatusInternalServerError)
-			return
-		}
-		w.Write(data)
-		w.Write([]byte("\n"))
-
+	data, err := json.Marshal(rows)
+	if err != nil {
+		errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
+		http.Error(w, string(errJSON), http.StatusInternalServerError)
+		return
 	}
+	w.Write(data)
+	w.Write([]byte("\n"))
 }
 func (s *Server) AddToDoHandler(w http.ResponseWriter, r *http.Request) {
 	var todoData ToDoData
