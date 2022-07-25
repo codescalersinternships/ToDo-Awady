@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1a34381e-890a-4abd-8822-f58597044760",
+		"_postman_id": "0ddc5018-7ad3-4d1f-abe6-5fb1cae1b34f",
 		"name": "ToDo List API",
 		"description": "This is a simple docs for ToDo List API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -15,6 +15,19 @@
 					"item": [
 						{
 							"name": "Get the ToDo entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -30,7 +43,7 @@
 									"variable": [
 										{
 											"key": "ID",
-											"value": "4969133",
+											"value": "8",
 											"description": "(Required) ID of the ToDo entry"
 										}
 									]
@@ -54,7 +67,7 @@
 											"variable": [
 												{
 													"key": "ID",
-													"value": "4969133",
+													"value": "-91884526",
 													"description": "(Required) ID of the ToDo entry"
 												}
 											]
@@ -89,7 +102,7 @@
 											"variable": [
 												{
 													"key": "ID",
-													"value": "4969133",
+													"value": "-91884526",
 													"description": "(Required) ID of the ToDo entry"
 												}
 											]
@@ -106,11 +119,59 @@
 									],
 									"cookie": [],
 									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "-91884526",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
 								}
 							]
 						},
 						{
 							"name": "delete ToDo entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -126,7 +187,7 @@
 									"variable": [
 										{
 											"key": "ID",
-											"value": "4969133",
+											"value": "10000",
 											"description": "(Required) ID of the ToDo entry"
 										}
 									]
@@ -150,7 +211,7 @@
 											"variable": [
 												{
 													"key": "ID",
-													"value": "4969133",
+													"value": "-91884526",
 													"description": "(Required) ID of the ToDo entry"
 												}
 											]
@@ -185,7 +246,7 @@
 											"variable": [
 												{
 													"key": "ID",
-													"value": "4969133",
+													"value": "-91884526",
 													"description": "(Required) ID of the ToDo entry"
 												}
 											]
@@ -202,11 +263,59 @@
 									],
 									"cookie": [],
 									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "-91884526",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
 								}
 							]
 						},
 						{
 							"name": "update ToDo entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -217,7 +326,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"text\": \"et pariatur\"\n}",
+									"raw": "{\n  \"text\": \"dolore dolore\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -236,7 +345,7 @@
 									"variable": [
 										{
 											"key": "ID",
-											"value": "4969133",
+											"value": "1000",
 											"description": "(Required) ID of the ToDo entry"
 										}
 									]
@@ -260,7 +369,7 @@
 											"variable": [
 												{
 													"key": "ID",
-													"value": "4969133",
+													"value": "-91884526",
 													"description": "(Required) ID of the ToDo entry"
 												}
 											]
@@ -295,7 +404,7 @@
 											"variable": [
 												{
 													"key": "ID",
-													"value": "4969133",
+													"value": "-91884526",
 													"description": "(Required) ID of the ToDo entry"
 												}
 											]
@@ -312,6 +421,41 @@
 									],
 									"cookie": [],
 									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/todo/:ID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"todo",
+												":ID"
+											],
+											"variable": [
+												{
+													"key": "ID",
+													"value": "-91884526",
+													"description": "(Required) ID of the ToDo entry"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
 								}
 							]
 						}
@@ -319,6 +463,19 @@
 				},
 				{
 					"name": "add new ToDo entry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -329,7 +486,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"text\": \"et pariatur\"\n}",
+							"raw": "{\n  \"text\": \"dolore dolore\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,10 +505,26 @@
 					},
 					"response": [
 						{
-							"name": "Not Found",
+							"name": "OK",
 							"originalRequest": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"text\":\"new todo\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{baseUrl}}/todo",
 									"host": [
@@ -362,8 +535,39 @@
 									]
 								}
 							},
-							"status": "Not Found",
-							"code": 404,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "wierdformat{}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/todo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
@@ -378,6 +582,19 @@
 				},
 				{
 					"name": "Get all ToDo entries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -409,6 +626,60 @@
 							},
 							"status": "OK",
 							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "ID Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/todo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/todo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"todo"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{

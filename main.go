@@ -90,7 +90,7 @@ func (s *Server) GetToDoHandler(w http.ResponseWriter, r *http.Request) {
 	result := s.DB.First(&res, id)
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
-		http.Error(w, string(errJson), http.StatusInternalServerError)
+		http.Error(w, string(errJson), http.StatusNotFound)
 		return
 	}
 
@@ -130,7 +130,7 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 	result = s.DB.First(&res, id)
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
-		http.Error(w, string(errJson), http.StatusInternalServerError)
+		http.Error(w, string(errJson), http.StatusNotFound)
 		return
 	}
 	data, err := json.Marshal(res)
