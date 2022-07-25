@@ -59,9 +59,20 @@ func (s *Server) AddToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	s.DB.Create(&ToDo{Text: todoData.Text})
+	var result *gorm.DB
+	result = s.DB.Create(&ToDo{Text: todoData.Text})
+	if result.Error != nil {
+		errJSON, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
+		http.Error(w, string(errJSON), http.StatusInternalServerError)
+		return
+	}
 	var res ToDo
-	s.DB.Last(&res)
+	result = s.DB.Last(&res)
+	if result.Error != nil {
+		errJSON, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
+		http.Error(w, string(errJSON), http.StatusInternalServerError)
+		return
+	}
 	data, err := json.Marshal(res)
 	if err != nil {
 		errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
@@ -104,7 +115,8 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var res ToDo
-	result := s.DB.Model(&ToDo{}).Where("ID = ?", id).Update("Text", todoData.Text)
+	var result *gorm.DB
+	result = s.DB.Model(&ToDo{}).Where("ID = ?", id).Update("Text", todoData.Text)
 	if result.Error != nil {
 		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
 		http.Error(w, string(errJson), http.StatusInternalServerError)
@@ -115,9 +127,9 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
-	e := s.DB.First(&res, id)
-	if e.Error != nil {
-		errJson, _ := json.Marshal(ErrorResponse{Error: e.Error.Error()})
+	result = s.DB.First(&res, id)
+	if result.Error != nil {
+		errJson, _ := json.Marshal(ErrorResponse{Error: result.Error.Error()})
 		http.Error(w, string(errJson), http.StatusInternalServerError)
 		return
 	}
