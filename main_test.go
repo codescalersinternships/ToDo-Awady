@@ -179,10 +179,10 @@ func TestDeleteToDoHandler(t *testing.T) {
 
 		s.DeleteToDoHandler(response, request)
 
-		got := response.Body.String()
-		want := "[{\"id\":1,\"text\":\"first todo\"}]\n"
+		got := response.Code
+		want := 200
 		if got != want {
-			t.Errorf("got %q want %q", got, want)
+			t.Errorf("got %d want %d", got, want)
 		}
 
 	})

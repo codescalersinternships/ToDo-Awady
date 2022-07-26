@@ -156,8 +156,7 @@ func (s *Server) DeleteToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJson), http.StatusNotFound)
 		return
 	}
-	s.GetAllToDosHandler(w, r)
-
+	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
