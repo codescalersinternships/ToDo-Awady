@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"os"
 
 	"net/http"
 
@@ -14,7 +15,8 @@ import (
 	"gorm.io/gorm"
 )
 
-const DBFILE = "./data/todo.db"
+var DBFILE = "./data/todo.db"
+var LISTENURL = ":5000"
 
 type ToDoData struct {
 	Text string
@@ -160,6 +162,12 @@ func (s *Server) DeleteToDoHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	if f, ok := os.LookupEnv("DBFILE"); ok {
+		DBFILE = f
+	}
+	if u, ok := os.LookupEnv("LISTENURL"); ok {
+		LISTENURL = u
+	}
 	s := Server{}
 	var err error
 	s.DB, err = gorm.Open(sqlite.Open(DBFILE), &gorm.Config{})
@@ -178,6 +186,6 @@ func main() {
 	r.HandleFunc("/todo/{id}", s.DeleteToDoHandler).Methods("DELETE")
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
-	log.Fatal(http.ListenAndServe(":5000", r))
+	log.Fatal(http.ListenAndServe(LISTENURL, r))
 
 }
