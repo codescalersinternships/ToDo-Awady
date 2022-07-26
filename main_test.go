@@ -35,7 +35,7 @@ func TestGetToDoHandler(t *testing.T) {
 		request = mux.SetURLVars(request, map[string]string{"id": "1"})
 		s.GetToDoHandler(response, request)
 		got := response.Body.String()
-		want := "{\"ID\":1,\"Text\":\"first todo\"}\n"
+		want := "{\"id\":1,\"text\":\"first todo\"}\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
@@ -70,7 +70,7 @@ func TestGetAllToDosHandler(t *testing.T) {
 		s.GetAllToDosHandler(response, request)
 
 		got := response.Body.String()
-		want := "[{\"ID\":1,\"Text\":\"first todo\"},{\"ID\":2,\"Text\":\"second todo\"}]\n"
+		want := "[{\"id\":1,\"text\":\"first todo\"},{\"id\":2,\"text\":\"second todo\"}]\n"
 		if got != want {
 			t.Errorf("got %q want %q", response.Body.String(), want)
 		}
@@ -95,7 +95,7 @@ func TestAddToDoHandler(t *testing.T) {
 		s.AddToDoHandler(response, request)
 
 		got := response.Body.String()
-		want := "{\"ID\":3,\"Text\":\"new todo\"}\n"
+		want := "{\"id\":3,\"text\":\"new todo\"}\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
@@ -144,7 +144,7 @@ func TestUpdateToDoHandler(t *testing.T) {
 		s.UpdateToDoHandler(response, request)
 
 		got := response.Body.String()
-		want := "{\"ID\":2,\"Text\":\"updating second todo\"}\n"
+		want := "{\"id\":2,\"text\":\"updating second todo\"}\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
@@ -180,7 +180,7 @@ func TestDeleteToDoHandler(t *testing.T) {
 		s.DeleteToDoHandler(response, request)
 
 		got := response.Body.String()
-		want := "[{\"ID\":1,\"Text\":\"first todo\"}]\n"
+		want := "[{\"id\":1,\"text\":\"first todo\"}]\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}

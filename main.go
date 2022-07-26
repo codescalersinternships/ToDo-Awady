@@ -21,8 +21,8 @@ type ToDoData struct {
 }
 
 type ToDo struct {
-	ID   uint
-	Text string
+	ID   uint   `json:"id"`
+	Text string `json:"text"`
 }
 
 type ErrorResponse struct {
