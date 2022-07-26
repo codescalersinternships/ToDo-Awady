@@ -15,7 +15,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var DBFILE = "./data/todo.db"
+var DBFILE = "todo.db"
 var LISTENURL = ":5000"
 
 type ToDoData struct {
