@@ -50,6 +50,7 @@ func (s *Server) GetAllToDosHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
+	w.WriteHeader(http.StatusCreated)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -81,6 +82,7 @@ func (s *Server) AddToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
+	w.WriteHeader(http.StatusAccepted)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -102,6 +104,7 @@ func (s *Server) GetToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
+	w.WriteHeader(http.StatusCreated)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -141,6 +144,7 @@ func (s *Server) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
+	w.WriteHeader(http.StatusAccepted)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -158,7 +162,7 @@ func (s *Server) DeleteToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJson), http.StatusNotFound)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func main() {

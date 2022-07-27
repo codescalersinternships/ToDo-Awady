@@ -30,8 +30,8 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           },
           "500": {
             "description": "Internal Server Error"
@@ -44,8 +44,8 @@
         ],
         "summary": "Get all ToDo entries",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
@@ -73,8 +73,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
           "404": {
             "description": "ID Not Found"
@@ -100,8 +100,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
           },
           "404": {
             "description": "ID Not Found"
@@ -142,8 +142,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           },
           "404": {
             "description": "ID Not Found"

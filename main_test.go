@@ -47,7 +47,7 @@ func TestGetToDoHandler(t *testing.T) {
 		request = mux.SetURLVars(request, map[string]string{"id": "1000"})
 		s.GetToDoHandler(response, request)
 		got := response.Code
-		want := 404
+		want := http.StatusNotFound
 		if got != want {
 			t.Errorf("got %d want %d", got, want)
 		}
@@ -180,7 +180,7 @@ func TestDeleteToDoHandler(t *testing.T) {
 		s.DeleteToDoHandler(response, request)
 
 		got := response.Code
-		want := 200
+		want := http.StatusNoContent
 		if got != want {
 			t.Errorf("got %d want %d", got, want)
 		}
