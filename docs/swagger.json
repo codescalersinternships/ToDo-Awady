@@ -30,8 +30,8 @@
         ],
         "description": "",
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "201": {
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
@@ -44,8 +44,8 @@
         ],
         "summary": "Get all ToDo entries",
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"
@@ -73,8 +73,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
           "404": {
             "description": "ID Not Found"

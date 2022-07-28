@@ -1,9 +1,13 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"net/http"
 
@@ -32,7 +36,8 @@ type ErrorResponse struct {
 }
 
 type Server struct {
-	DB *gorm.DB
+	srv *http.Server
+	DB  *gorm.DB
 }
 
 func (s *Server) GetAllToDosHandler(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +55,7 @@ func (s *Server) GetAllToDosHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
+	w.WriteHeader(http.StatusOK)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -82,7 +87,7 @@ func (s *Server) AddToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusAccepted)
+	w.WriteHeader(http.StatusCreated)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -104,7 +109,7 @@ func (s *Server) GetToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
+	w.WriteHeader(http.StatusOK)
 	w.Write(data)
 	w.Write([]byte("\n"))
 }
@@ -190,6 +195,29 @@ func main() {
 	r.HandleFunc("/todo/{id}", s.DeleteToDoHandler).Methods("DELETE")
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
-	log.Fatal(http.ListenAndServe(LISTENURL, r))
+	s.srv = &http.Server{Addr: ":5000", Handler: r}
+	done := make(chan os.Signal, 1)
+	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
+	go func() {
+		if err := s.srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
+	log.Print("Server Started")
+
+	<-done
+	log.Print("Server Stopped")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer func() {
+		// extra handling here
+		cancel()
+	}()
+
+	if err := s.srv.Shutdown(ctx); err != nil {
+		log.Fatalf("Server Shutdown Failed:%+v", err)
+	}
+	log.Print("Server Exited Properly")
 
 }
