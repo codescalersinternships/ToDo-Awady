@@ -20,6 +20,13 @@ import (
 var DBFILE = "todo.db"
 var LISTENURL = ":5000"
 
+func Middleware(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(r.Method)
+		h.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 	if f, ok := os.LookupEnv("DBFILE"); ok {
 		DBFILE = f
@@ -35,6 +42,7 @@ func main() {
 		panic("Couldn't initialize app")
 	}
 
+	r.Use(Middleware)
 	r.HandleFunc("/todo", a.GetAllToDosHandler).Methods("GET")
 	r.HandleFunc("/todo", a.AddToDoHandler).Methods("POST")
 	r.HandleFunc("/todo/{id}", a.GetToDoHandler).Methods("GET")
