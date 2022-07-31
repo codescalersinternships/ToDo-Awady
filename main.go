@@ -14,20 +14,16 @@ import (
 	_ "restapi/docs"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 var DBFILE = "todo.db"
 var LISTENURL = ":5000"
 
-func Middleware(h http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println(r.Method)
-		h.ServeHTTP(w, r)
-	})
-}
-
 func main() {
+	c := cors.AllowAll()
+
 	if f, ok := os.LookupEnv("DBFILE"); ok {
 		DBFILE = f
 	}
@@ -36,7 +32,8 @@ func main() {
 	}
 
 	r := mux.NewRouter()
-	a, err := NewApp(DBFILE, LISTENURL, r)
+	handler := c.Handler(r)
+	a, err := NewApp(DBFILE, LISTENURL, handler)
 	if err != nil {
 		fmt.Printf("error: %q, DBFILE: %q, LISTENURL: %q", err.Error(), DBFILE, LISTENURL)
 		panic("Couldn't initialize app")
@@ -50,7 +47,6 @@ func main() {
 	r.HandleFunc("/todo/{id}", a.DeleteToDoHandler).Methods("DELETE")
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
-	a.srv = &http.Server{Addr: ":5000", Handler: r}
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 

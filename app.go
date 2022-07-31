@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -116,12 +117,15 @@ func (a *App) DeleteToDoHandler(w http.ResponseWriter, r *http.Request) {
 	if err == gorm.ErrRecordNotFound {
 		errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
 		http.Error(w, string(errJSON), http.StatusNotFound)
+		fmt.Println(w.Header())
 		return
 	}
 	if err != nil {
 		errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
+		fmt.Println(w.Header())
 		return
 	}
-	w.WriteHeader(http.StatusNoContent)
+
+	// w.WriteHeader(http.StatusNoContent)
 }
