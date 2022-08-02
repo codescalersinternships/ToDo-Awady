@@ -19,7 +19,8 @@ type ErrorResponse struct {
 }
 
 type ToDoData struct {
-	Text string
+	Text   string
+	Status bool
 }
 
 func NewApp(DBFILE, LISTENURL string, router http.Handler) (App, error) {
@@ -94,7 +95,7 @@ func (a *App) UpdateToDoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, string(errJSON), http.StatusInternalServerError)
 		return
 	}
-	todo, err := a.db.UpdateToDo(id, todoData.Text)
+	todo, err := a.db.UpdateToDo(id, todoData.Text, todoData.Status)
 	if err == gorm.ErrRecordNotFound {
 		errJSON, _ := json.Marshal(ErrorResponse{Error: err.Error()})
 		http.Error(w, string(errJSON), http.StatusNotFound)

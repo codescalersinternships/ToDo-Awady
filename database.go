@@ -12,8 +12,9 @@ type database struct {
 }
 
 type ToDo struct {
-	ID   uint   `json:"id"`
-	Text string `json:"text"`
+	ID     uint   `json:"id"`
+	Text   string `json:"text"`
+	Status bool   `json:"status"`
 }
 
 func (d *database) NewConnection(DBFILE string) error {
@@ -64,10 +65,10 @@ func (d *database) AddToDo(text string) ([]byte, error) {
 	return data, err
 }
 
-func (d *database) UpdateToDo(id, text string) ([]byte, error) {
+func (d *database) UpdateToDo(id, text string, status bool) ([]byte, error) {
 	var res ToDo
 	var result *gorm.DB
-	result = d.db.Model(&ToDo{}).Where("ID = ?", id).Update("Text", text)
+	result = d.db.Model(&ToDo{}).Where("ID = ?", id).Updates(map[string]interface{}{"text": text, "status": status})
 	if result.Error != nil {
 		return nil, result.Error
 	} else if result.RowsAffected < 1 {

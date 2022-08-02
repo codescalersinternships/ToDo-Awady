@@ -136,6 +136,9 @@
               "properties": {
                 "text": {
                   "type": "string"
+                },
+                "status": {
+                  "type": "boolean"
                 }
               }
             }
@@ -156,7 +159,7 @@
     }
   },
   "swagger": "2.0",
-  "host": "localhost:5000",
+  "host": "localhost:8080",
   "schemes": [
     "http"
   ]

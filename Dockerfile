@@ -4,7 +4,7 @@ COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
 ENV DBFILE=./data/todo.db
-ENV LISTENURL=:5000
+ENV LISTENURL=:8080
 
 COPY . .
 RUN go build -a -ldflags "-linkmode external -extldflags '-static' -s -w" .

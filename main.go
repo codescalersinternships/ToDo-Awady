@@ -19,7 +19,7 @@ import (
 )
 
 var DBFILE = "todo.db"
-var LISTENURL = ":5000"
+var LISTENURL = ":8080"
 
 func main() {
 	c := cors.AllowAll()
