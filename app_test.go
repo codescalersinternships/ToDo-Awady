@@ -31,7 +31,7 @@ func TestGetToDoHandler(t *testing.T) {
 		request = mux.SetURLVars(request, map[string]string{"id": "1"})
 		a.GetToDoHandler(response, request)
 		got := response.Body.String()
-		want := "{\"id\":1,\"text\":\"first todo\"}\n"
+		want := "{\"id\":1,\"text\":\"first todo\",\"status\":false}\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
@@ -64,7 +64,7 @@ func TestGetAllToDosHandler(t *testing.T) {
 		a.GetAllToDosHandler(response, request)
 
 		got := response.Body.String()
-		want := "[{\"id\":1,\"text\":\"first todo\"},{\"id\":2,\"text\":\"second todo\"}]\n"
+		want := "[{\"id\":1,\"text\":\"first todo\",\"status\":false},{\"id\":2,\"text\":\"second todo\",\"status\":false}]\n"
 		if got != want {
 			t.Errorf("got %q want %q", response.Body.String(), want)
 		}
@@ -87,7 +87,7 @@ func TestAddToDoHandler(t *testing.T) {
 		a.AddToDoHandler(response, request)
 
 		got := response.Body.String()
-		want := "{\"id\":3,\"text\":\"new todo\"}\n"
+		want := "{\"id\":3,\"text\":\"new todo\",\"status\":false}\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
@@ -112,7 +112,7 @@ func TestUpdateToDoHandler(t *testing.T) {
 	a, _ := NewApp(file, LISTENURL, mux.NewRouter())
 	a.db.AddToDo("first todo")
 	a.db.AddToDo("second todo")
-	var todoJSON = []byte(`{"text":"updating second todo"}`)
+	var todoJSON = []byte(`{"text":"updating second todo", "status": true}`)
 	t.Run("updating second todo with empty body", func(t *testing.T) {
 		request := httptest.NewRequest(http.MethodPost, "localhost:5000/todo/2", nil)
 		response := httptest.NewRecorder()
@@ -127,14 +127,14 @@ func TestUpdateToDoHandler(t *testing.T) {
 		}
 	})
 	t.Run("updating second todo", func(t *testing.T) {
-		request := httptest.NewRequest(http.MethodPost, "localhost:5000/todo/2", bytes.NewBuffer(todoJSON))
+		request := httptest.NewRequest(http.MethodPut, "localhost:5000/todo/2", bytes.NewBuffer(todoJSON))
 		response := httptest.NewRecorder()
 		request = mux.SetURLVars(request, map[string]string{"id": "2"})
 
 		a.UpdateToDoHandler(response, request)
 
 		got := response.Body.String()
-		want := "{\"id\":2,\"text\":\"updating second todo\"}\n"
+		want := "{\"id\":2,\"text\":\"updating second todo\",\"status\":true}\n"
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
