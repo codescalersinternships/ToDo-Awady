@@ -17,8 +17,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
+        uses: cd ./backend
+      -
         name: Build and push
-        run: cd ./backend
         uses: docker/build-push-action@v3
         with:
           context: .
