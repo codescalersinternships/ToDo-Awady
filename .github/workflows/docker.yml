@@ -18,9 +18,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
+        run: cd ./backend
         uses: docker/build-push-action@v3
         with:
-          context: ./backend/
+          context: .
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-api:latest
