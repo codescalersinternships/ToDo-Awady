@@ -20,7 +20,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: ./backend/Dockerfile
+          context: ./backend
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-api:latest
