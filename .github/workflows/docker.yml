@@ -21,6 +21,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./backend
-          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-api:latest
