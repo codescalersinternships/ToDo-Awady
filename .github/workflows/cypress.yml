@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run docker compose
+        run: docker compose up -d
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          project: ./frontend/frontend/svelte-todo-app
